@@ -1,17 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <!-- <HelloWorld msg="Github Gists API"/> -->
+  <div>
+    <GistList :username="username" :token="token" />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+// import HelloWorld from './components/HelloWorld.vue';
+import GistList from './components/GistList.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
+    // HelloWorld,
+    GistList
+  },
+  data() {
+    return {
+      username: '',
+      token: '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'
+    }
+  },
 });
 </script>
 
