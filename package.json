@@ -11,10 +11,12 @@
     "@hyjiacan/vue-slideout": "^3.0.2",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "prismjs": "^1.29.0",
     "vue": "^3.2.13",
     "vue3-side-panel": "^1.2.0"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",

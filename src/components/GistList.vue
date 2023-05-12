@@ -9,11 +9,7 @@
             </div>
         </div>
         <div class="p-4 bg-white">
-            <div v-if="loading">
-                <div class="transform translate-x-1/2 translate-y-1/2 ">
-                    <div class="border-t-transparent border-solid animate-spin rounded-full border-blue-500 border-4 h-8 w-8"></div>
-                </div>
-            </div>
+            <div v-if="loading" class="border-t-transparent border-solid animate-spin rounded-full border-blue-500 border-4 h-8 w-8 m-auto"></div>
 
             <div v-else-if="error" class="font-bold text-red-500">{{ error }}</div>
 
@@ -33,7 +29,7 @@
                                 <div class="flex items-center">
                                     <img class="w-8 h-8 rounded-full mr-4" :src="userInfo.avatar_url" :alt="userInfo.name">
                                     <div class="text-left">
-                                        <a  @click="openPanel = !openPanel" class="text-md text-blue-600 cursor-pointer">{{ userInfo.login }} / <span class="font-bold">{{ file.filename }}</span></a>
+                                        <a  @click="openPanel(userInfo, file)" class="text-md text-blue-600 cursor-pointer">{{ userInfo.login }} / <span class="font-bold">{{ file.filename }}</span></a>
                                         <div class="text-gray-500 text-sm">Created {{ timeAgo(gist.created_at) }}</div>
                                     </div>
                                 </div>
@@ -46,7 +42,7 @@
         </div>
     </div>
 
-    <GistSlidePanel :isOpenedProp="openPanel" />
+    <GistSlidePanel :opened="clickedNum" :url="gistUrl"/>
     
   </template>
   
@@ -96,20 +92,15 @@
         required: true,
       },
     },
-    setup() {
-        const openPanel = ref(false);
-
-        return {
-            openPanel
-        }
-    },
     data() {
         return {
             localUsername: this.username,
             userInfo: {} as UserInfo,
             gists: [] as Gist[],
             loading: false,
-            error: null as string | null
+            error: null as string | null,
+            clickedNum: 0,
+            gistUrl: null as string | null,
         };
     },
     methods: {
@@ -224,6 +215,10 @@
                     break;
             }
             return color;
+        },
+        openPanel(userInfo: UserInfo, file: GistFile) {
+            this.gistUrl = file.raw_url
+            this.clickedNum++
         }
     },
     
