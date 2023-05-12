@@ -11,7 +11,7 @@
         <div class="p-4 bg-white">
             <div v-if="loading" class="border-t-transparent border-solid animate-spin rounded-full border-blue-500 border-4 h-8 w-8 m-auto"></div>
 
-            <div v-else-if="error" class="font-bold text-red-500">{{ error }}</div>
+            <div v-else-if="error" class="font-bold text-red-500 text-center">{{ error }}</div>
 
             <div v-else class="flex flex-col md:flex-row gap-4">
                 <div v-if="userInfo.id" class="flex flex-col items-center md:w-1/4">
@@ -49,34 +49,9 @@
   <script lang="ts">
   import { defineComponent, reactive, nextTick, toRefs, inject, ref } from 'vue';
   import axios, { AxiosError, AxiosResponse } from 'axios';
+  import { Gist, GistFile, UserInfo } from '../types';
   import GistSlidePanel from './GistSlidePanel.vue';
 
-  interface Gist {
-    id: string
-    description: string | null
-    html_url: string
-    created_at: string
-    files: GistFile[]
-  }
-
-  interface GistFile {
-    filename: string
-    language: string
-    raw_url: string
-    type: string
-    size: number
-    color: string
-  }
-  
-  interface UserInfo {
-    id: string
-    name: string
-    login: string
-    bio: string | null
-    location: string
-    avatar_url: string | ''
-  }
-  
   export default defineComponent({
     name: 'GistList',
     components: {
