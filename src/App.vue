@@ -16,7 +16,7 @@
     data() {
       return {
         username: '',
-        token: ''
+        token: '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'
       }
     },
   });
